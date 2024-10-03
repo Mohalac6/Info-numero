@@ -33,7 +33,7 @@ Le script contient deux fonctions principales :
 ### Exemple
 Pour obtenir des informations sur un numéro de téléphone, vous pouvez utiliser le code suivant :
 ```
-from votre_module import about_phone, format_phone_info
+from info_numero import about_phone, format_phone_info
 
 number = "+33 6 19 19 28 50"
 info = about_phone(number, name=True, country=True, region=True, tz=True)
@@ -42,8 +42,10 @@ print(formatted_info)
 ```
 Cela affichera quelque chose comme :
 ```
-Operator: SFR                       Country: France                     Region: France
-Timezones: Europe/Paris
+Operator : SFR
+Country : France
+Region : France
+Timezones : Europe/Paris
 ```
 
 ### Paramètres de **about_phone**
@@ -72,7 +74,7 @@ La fonction lève une exception ValueError dans les cas suivants :
 
 Pour exécuter directement le script, utilisez :
 ```
-Python votre_script.py
+Python info_numero.py
 ```
 Cela analysera le numéro de téléphone défini dans le script et affichera les informations formatées.
 
