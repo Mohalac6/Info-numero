@@ -50,6 +50,9 @@ def about_phone(number: str, name: bool = False, country: bool = False, region: 
     except phonenumbers.NumberParseException as e:
         raise ValueError(f"Erreur lors de l'analyse du numéro: {e}")
 
+    except Exception as e:
+        raise RuntimeError(f"Une erreur inattendue s'est produite : {e}")
+
 def format_phone_info(info: PhoneNumberInfo) -> str:
     """
     Formatte les informations du numéro de téléphone sous forme de texte lisible.
@@ -60,17 +63,14 @@ def format_phone_info(info: PhoneNumberInfo) -> str:
     Returns:
         str: Chaîne de texte formatée.
     """
-    details = []
-    if info.operator:
-        details.append(f"Operator: {info.operator}")
-    if info.country:
-        details.append(f"Country: {info.country}")
-    if info.region:
-        details.append(f"Region: {info.region}")
-    if info.timezones:
-        details.append(f"Timezones: {', '.join(info.timezones)}")
+    fields = {
+        "Operator" : info.operator,
+        "Country" : info.country,
+        "Region" : info.region,
+        "Timezones" : ','.join(info.timezones) if info.timezones else None
+    }
 
-    return "\n".join(details)
+    return "\n".join(f"{label} : {value}" for label, value in fields.items() if value)
 
 if __name__ == '__main__':
     number = ""
